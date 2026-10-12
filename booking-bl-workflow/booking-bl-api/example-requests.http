@@ -1,0 +1,46 @@
+### Create booking manually
+POST http://localhost:3000/api/bookings
+Content-Type: application/json
+
+{
+  "shipper": "Acme Exports",
+  "consignee": "Northline Imports",
+  "originPort": "Shanghai",
+  "destinationPort": "Singapore",
+  "cargoDescription": "Electronics",
+  "containerType": "40HC",
+  "etd": "2026-10-15",
+  "eta": "2026-10-22",
+  "requestorEmail": "ops@company.com",
+  "sourceChannel": "manual"
+}
+
+### Email intake
+POST http://localhost:3000/api/bookings/email-intake
+Content-Type: application/json
+
+{
+  "senderEmail": "customer@example.com",
+  "subject": "Booking request for Shanghai to Singapore",
+  "sourceEmailId": "email-001",
+  "shipper": "BluePeak Trading",
+  "consignee": "Harbor Goods",
+  "originPort": "Busan",
+  "destinationPort": "Jakarta",
+  "cargoDescription": "Machinery",
+  "containerType": "20GP",
+  "etd": "2026-10-20",
+  "eta": "2026-10-27"
+}
+
+### Confirm booking
+PATCH http://localhost:3000/api/bookings/1/confirm
+Content-Type: application/json
+
+{
+  "carrier": "OceanAlliance",
+  "voyageNumber": "OA-123"
+}
+
+### Get all bookings
+GET http://localhost:3000/api/bookings

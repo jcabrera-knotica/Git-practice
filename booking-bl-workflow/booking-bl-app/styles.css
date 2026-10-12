@@ -1,0 +1,419 @@
+:root {
+  --bg: #f4f7fb;
+  --panel: #ffffff;
+  --primary: #1f5aa6;
+  --primary-dark: #153d74;
+  --accent: #dfeefc;
+  --text: #1b2430;
+  --muted: #5d6b7a;
+  --success: #1f8f5f;
+  --warning: #d28a24;
+  --danger: #b93f3f;
+  --border: #dfe6ee;
+  --shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 32px auto;
+  padding: 0 20px 40px;
+}
+
+header {
+  margin-bottom: 20px;
+}
+
+header h1 {
+  margin: 0;
+  color: var(--primary-dark);
+}
+
+header p {
+  margin-top: 8px;
+  color: var(--muted);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+.two-col {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+input {
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button.secondary {
+  background: var(--accent);
+  color: var(--primary-dark);
+}
+
+button.warning {
+  background: var(--warning);
+}
+
+button.success {
+  background: var(--success);
+}
+
+button.danger {
+  background: var(--danger);
+}
+
+form {
+  display: grid;
+  gap: 16px;
+}
+
+.stats {
+  display: grid;
+  gap: 12px;
+}
+
+.stat-box {
+  background: var(--accent);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.stat-box strong {
+  display: block;
+  font-size: 24px;
+  color: var(--primary-dark);
+}
+
+.list-panel {
+  margin-top: 24px;
+}
+
+.panel-header {
+  margin-bottom: 16px;
+}
+
+.booking-list {
+  display: grid;
+  gap: 14px;
+}
+
+.booking-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  background: #fbfdff;
+}
+
+.booking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.booking-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  background: #dfeefc;
+  color: var(--primary-dark);
+}
+
+.status-pill[data-status="Pending Manual Review"] {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-pill[data-status="Confirmed"] {
+  background: #dff3e8;
+  color: var(--success);
+}
+
+.status-pill[data-status="Loaded"] {
+  background: #efe5d0;
+  color: var(--warning);
+}
+
+.status-pill[data-status="BL Issued"] {
+  background: #dfeefc;
+  color: var(--primary-dark);
+}
+
+.status-pill[data-status="Released"] {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+.status-pill[data-status="Rejected"],
+.status-pill[data-status="Email Intake Failed"] {
+  background: #f9dcdc;
+  color: var(--danger);
+}
+
+.status-flow {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border: 1px solid #dbeafe;
+  border-radius: 10px;
+  background: #f8fbff;
+}
+
+.status-flow-label {
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--primary-dark);
+}
+
+.status-flow-track {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.status-arrow {
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.info-box {
+  background: #eef5ff;
+  border: 1px solid #cfe1ff;
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: var(--primary-dark);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 20;
+}
+
+.modal-backdrop.hidden {
+  display: none;
+}
+
+.modal {
+  width: min(900px, 92vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--panel);
+  border-radius: 16px;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.2);
+  border: 1px solid var(--border);
+  padding: 20px;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.modal-header h2 {
+  margin: 0;
+}
+
+.billing-section {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  background: #f9fbff;
+}
+
+.billing-section h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
+  gap: 10px;
+}
+
+.print-modal {
+  width: min(900px, 92vw);
+}
+
+.bl-printout {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+.bl-document {
+  display: grid;
+  gap: 16px;
+}
+
+.bl-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 12px;
+}
+
+.bl-label {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.bl-header-row h3 {
+  margin: 4px 0 0;
+  color: var(--primary-dark);
+}
+
+.bl-doc-meta {
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.bl-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.bl-grid-two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.bl-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  background: #f9fbff;
+}
+
+.bl-card h4 {
+  margin: 0 0 8px;
+  color: var(--primary-dark);
+}
+
+.bl-card p {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.bl-footer {
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.bl-actions {
+  justify-content: flex-end;
+}
+
+@media (max-width: 840px) {
+  .layout,
+  .two-col,
+  .booking-meta,
+  .bl-grid,
+  .bl-grid-two {
+    grid-template-columns: 1fr;
+  }
+
+  .bl-header-row {
+    flex-direction: column;
+  }
+}
