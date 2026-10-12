@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking & BL Workflow</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Booking & BL Workflow</h1>
+        <p>Email intake to delivery tracking prototype</p>
+      </header>
+
+      <main class="layout">
+        <section class="panel form-panel">
+          <h2>New Booking Intake</h2>
+          <form id="bookingForm">
+            <div class="grid two-col">
+              <label>
+                Shipper
+                <input type="text" name="shipper" required />
+              </label>
+              <label>
+                Consignee
+                <input type="text" name="consignee" required />
+              </label>
+            </div>
+
+            <div class="grid two-col">
+              <label>
+                Origin Port
+                <input type="text" name="origin" required />
+              </label>
+              <label>
+                Destination Port
+                <input type="text" name="destination" required />
+              </label>
+            </div>
+
+            <div class="grid two-col">
+              <label>
+                Route
+                <input type="text" name="route" placeholder="Shanghai → Singapore" required />
+              </label>
+              <label>
+                Vessel
+                <input type="text" name="vessel" placeholder="MV Ocean Star" required />
+              </label>
+            </div>
+
+            <div class="grid two-col">
+              <label>
+                Rate
+                <input type="number" name="rate" min="0" step="0.01" placeholder="2500.00" required />
+              </label>
+              <label>
+                Cargo Description
+                <input type="text" name="cargo" required />
+              </label>
+            </div>
+
+            <div class="grid two-col">
+              <label>
+                Container Type
+                <input type="text" name="container" required />
+              </label>
+              <label>
+                Source Email / Attachments
+                <input type="text" name="source" placeholder="customer@example.com / booking.pdf" required />
+              </label>
+            </div>
+
+            <div class="grid two-col">
+              <label>
+                ETD
+                <input type="date" name="etd" required />
+              </label>
+              <label>
+                ETA
+                <input type="date" name="eta" required />
+              </label>
+            </div>
+
+            <div class="info-box">
+              Required before confirmation: Route, Vessel, and Rate.
+            </div>
+
+            <button type="submit">Create Booking</button>
+          </form>
+        </section>
+
+        <section class="panel summary-panel">
+          <h2>Booking Snapshot</h2>
+          <div class="stats" id="stats"></div>
+          <div class="status-flow" id="statusFlow"></div>
+        </section>
+      </main>
+
+      <section class="panel list-panel">
+        <div class="panel-header">
+          <h2>Bookings</h2>
+        </div>
+        <div id="bookingList" class="booking-list"></div>
+      </section>
+    </div>
+
+    <div id="editBookingModal" class="modal-backdrop hidden" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="editBookingTitle">
+        <div class="modal-header">
+          <h2 id="editBookingTitle">Edit Booking</h2>
+          <button type="button" class="secondary" id="closeEditModal">Close</button>
+        </div>
+
+        <form id="editBookingForm">
+          <input type="hidden" name="bookingId" id="editBookingId" />
+
+          <div class="grid two-col">
+            <label>
+              Shipper
+              <input type="text" name="shipper" required />
+            </label>
+            <label>
+              Consignee
+              <input type="text" name="consignee" required />
+            </label>
+          </div>
+
+          <div class="grid two-col">
+            <label>
+              Origin Port
+              <input type="text" name="origin" required />
+            </label>
+            <label>
+              Destination Port
+              <input type="text" name="destination" required />
+            </label>
+          </div>
+
+          <div class="grid two-col">
+            <label>
+              Route
+              <input type="text" name="route" placeholder="Shanghai → Singapore" required />
+            </label>
+            <label>
+              Vessel
+              <input type="text" name="vessel" placeholder="MV Ocean Star" required />
+            </label>
+          </div>
+
+          <div class="grid two-col">
+            <label>
+              Freight Rate
+              <input type="number" name="rate" min="0" step="0.01" placeholder="2500.00" required />
+            </label>
+            <label>
+              Cargo Description
+              <input type="text" name="cargo" required />
+            </label>
+          </div>
+
+          <div class="grid two-col">
+            <label>
+              Container Type
+              <input type="text" name="container" required />
+            </label>
+            <label>
+              Source Email / Attachments
+              <input type="text" name="source" placeholder="customer@example.com / booking.pdf" required />
+            </label>
+          </div>
+
+          <div class="grid two-col">
+            <label>
+              ETD
+              <input type="date" name="etd" required />
+            </label>
+            <label>
+              ETA
+              <input type="date" name="eta" required />
+            </label>
+          </div>
+
+          <div class="billing-section">
+            <h3>Customer Billing</h3>
+            <div class="grid two-col">
+              <label>
+                Freight to Customer
+                <input type="number" name="freightRate" min="0" step="0.01" placeholder="2500.00" />
+              </label>
+              <label>
+                Local Charges
+                <input type="number" name="localChargesRate" min="0" step="0.01" placeholder="150.00" />
+              </label>
+            </div>
+
+            <div class="grid two-col">
+              <label>
+                Other Charges
+                <input type="number" name="otherChargesRate" min="0" step="0.01" placeholder="75.00" />
+              </label>
+              <label>
+                Customer Billing Total
+                <input type="number" name="customerBillingTotal" min="0" step="0.01" placeholder="2725.00" readonly />
+              </label>
+            </div>
+          </div>
+
+          <div class="info-box">
+            Required before confirmation: Route, Vessel, and Freight Rate.
+          </div>
+
+          <div class="modal-actions">
+            <button type="submit">Save Booking</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="issueBlModal" class="modal-backdrop hidden" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="issueBlTitle">
+        <div class="modal-header">
+          <h2 id="issueBlTitle">Issue Bill of Lading</h2>
+          <button type="button" class="secondary" id="closeIssueBlModal">Close</button>
+        </div>
+
+        <form id="issueBlForm">
+          <input type="hidden" name="bookingId" id="issueBlBookingId" />
+
+          <div class="grid two-col">
+            <label>
+              Booking Number
+              <input type="text" name="bookingNumber" readonly />
+            </label>
+            <label>
+              BL Number
+              <input type="text" name="blNumber" required />
+            </label>
+          </div>
+
+          <div class="grid two-col">
+            <label>
+              BL Type
+              <select name="blType" required>
+                <option value="Original">Original</option>
+                <option value="Surrendered">Surrendered</option>
+                <option value="Seawaybill">Seawaybill</option>
+              </select>
+            </label>
+            <label>
+              BL Status
+              <input type="text" value="BL Issued" readonly />
+            </label>
+          </div>
+
+          <div class="info-box">
+            Booking number and BL number are different identifiers. BLs can be Original, Surrendered, or Seawaybill once the booking has been confirmed and is ready for issue.
+          </div>
+
+          <div class="modal-actions">
+            <button type="submit">Issue BL</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="blPrintoutModal" class="modal-backdrop hidden" aria-hidden="true">
+      <div class="modal print-modal" role="dialog" aria-modal="true" aria-labelledby="blPrintoutTitle">
+        <div class="modal-header print-header">
+          <h2 id="blPrintoutTitle">BL Printout</h2>
+          <button type="button" class="secondary" id="closeBlPrintoutModal">Close</button>
+        </div>
+
+        <div id="blPrintoutContent" class="bl-printout"></div>
+
+        <div class="modal-actions bl-actions">
+          <button type="button" class="secondary" id="printBlButton">Print</button>
+          <button type="button" class="secondary" id="emailBlButton">Email BL</button>
+          <button type="button" class="secondary" id="ediBlButton">Send via EDI</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
